@@ -62,7 +62,7 @@ class App extends React.Component {
       id: data.id,
       name: data.name,
       email: data.email,
-      entries: data.entires,
+      entries: data.entries,
       joined: data.joined
     }})
   }
@@ -98,7 +98,27 @@ class App extends React.Component {
       .predict(
         Clarifai.FACE_DETECT_MODEL,
         this.state.input)
-      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id:this.state.user.id
+            })
+          })
+            .then(response => response.json())
+            .then(count => {
+              this.setState(Object.assign(this.state.user, {entries: count}))
+              //TO update just entries in user instead of reassigning entire user
+              
+            })
+
+
+
+        }
+        
+        this.displayFaceBox(this.calculateFaceLocation(response))}) 
       .catch(err => console.log(err))
 
   }

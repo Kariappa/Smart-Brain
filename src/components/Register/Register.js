@@ -4,31 +4,13 @@ class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: "",
-      password: "",
-      name: ""
+      email: '',
+      password: '',
+      name: ''
     }
   }
 
-  onSubmitRegister = () => {
-    fetch('http://localhost:3000/register', {
-      method : 'post',
-      headers: { 'Content-Type' : 'application/json' },
-      body: JSON.stringify({
-        email : this.state.email,
-        password: this.state.password,
-        name : this.state.name
-      })
-    })
-    .then(response => response.json())
-    .then(user => {
-      if (user) {
-        this.props.loadUser(user)
-        this.props.onRouteChange('home')
-  }
-} )
-  }
-  
+
 
   onEmailChange = (event) => {
     this.setState({ email: event.target.value })
@@ -41,6 +23,31 @@ class Register extends React.Component {
   onNameChange = (event) => {
     this.setState({ name: event.target.value })
   }
+
+
+
+  onSubmitRegister = () => {
+    fetch('http://localhost:3000/register', {
+      method : 'post',
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        email : this.state.email,
+        password: this.state.password,
+        name : this.state.name
+      })
+    })
+    .then(response => response.json())
+    .then(user => {
+      console.log(user)
+      if (user.id) {
+        this.props.loadUser(user)
+        console.log(user)
+        this.props.onRouteChange('home')
+  }
+} )
+  }
+
+
 
   render() {
     return (
