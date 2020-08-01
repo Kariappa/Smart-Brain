@@ -29,28 +29,29 @@ const particleOptions =
 
 
 
-
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ""
+}
+}
 
 
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ""
-      }
+    this.state = initialState
 
-    }
+    
 
   }
   
@@ -112,10 +113,7 @@ class App extends React.Component {
               this.setState(Object.assign(this.state.user, {entries: count}))
               //TO update just entries in user instead of reassigning entire user
               
-            })
-
-
-
+            }).catch(console.log)
         }
         
         this.displayFaceBox(this.calculateFaceLocation(response))}) 
@@ -125,7 +123,7 @@ class App extends React.Component {
 
 onRouteChange = (route) => {
   if (route === 'signout') {
-    this.setState({isSignedIn: false})
+    this.setState(initialState)
   }
   else if (route === "home") {
     this.setState({isSignedIn:true})
