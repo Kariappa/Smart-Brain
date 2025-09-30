@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "body-parser": "^1.19.0",
     "clarifai": "^2.9.1",
-    "clarifai-nodejs-grpc": "^6.7.0",
+    "clarifai-nodejs-grpc": "^11.8.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-parallax-tilt": "^1.4.57",
